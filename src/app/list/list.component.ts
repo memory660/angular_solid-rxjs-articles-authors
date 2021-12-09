@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector, OnDestroy, OnInit } from '@angular/core';
 import { Observable, Subscription, tap } from 'rxjs';
 import { ListLevel } from '../enums/class';
 import { ArticleModel } from '../models/article-model';
@@ -13,7 +13,7 @@ import { ListService, ListType } from '../services/list.service';
   styleUrls: ['./list.component.scss'],
   providers: [AuthorsListService, ArticlesListService],
 })
-export class ListComponent implements OnInit {
+export class ListComponent implements OnInit, OnDestroy {
   public listTitle!: string;
   public showNbOfArticlesDropdown!: boolean;
   public list$!: Observable<ListType>;
@@ -62,5 +62,9 @@ export class ListComponent implements OnInit {
 
   selectArticles() {
     this.listService.listLevel$.next(ListLevel.ARTICLES);
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 }
