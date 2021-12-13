@@ -22,13 +22,13 @@ export class ApiService {
   fetchArticles(data: any): Observable<any> {
     return of([
       { name: 'article 1' },
-      { author: 'article 2' },
-      { author: 'article 3' },
+      { name: 'article 2' },
+      { name: 'article 3' },
     ]);
   }
 
   // GET /api/authors/:id/articles
   fetchArticlesByAuthor(authorId: number): Observable<any> {
-    return of([{ name: 'article 1' }, { author: 'article 2' }]);
+    return of([{ name: 'article 1' }, { name: 'article 2' }]);
   }
 }
